@@ -7,6 +7,7 @@
     "es6"
   ],
   "main": "lib/index.js",
+  "bin": "lib/bin.js",
   "module": "es6/index.js",
   "typings": "lib/index.d.ts",
   "sideEffects": false,
@@ -15,13 +16,13 @@
     "jest": "jest",
     "prettier": "prettier --no-semi --single-quote --print-width 120 --parser typescript --list-different \"{src,test}/**/*.ts\"",
     "fix-prettier": "prettier --no-semi --single-quote --print-width 120 --parser typescript --write \"{src,test}/**/*.ts\"",
-    "test": "npm run lint && npm run prettier && npm run dtslint && npm run jest && npm run docs",
+    "test": "npm run lint && npm run prettier && npm run jest && npm run docs",
     "clean": "rimraf lib/* es6/*",
-    "build": "npm run clean && tsc && tsc -p tsconfig.es6.json",
+    "build": "npm run clean && tsc && tsc -p tsconfig.es6.json && npm run rewrite",
     "prepublish": "npm run build",
-    "dtslint": "dtslint dtslint",
     "mocha": "mocha -r ts-node/register test/*.ts",
-    "docs": "docs-ts"
+    "docs": "docs-ts",
+    "rewrite": "ts-node rewrite.ts"
   },
   "repository": {
     "type": "git",
@@ -33,12 +34,15 @@
     "url": "https://github.com/gcanti/import-path-rewrite/issues"
   },
   "homepage": "https://github.com/gcanti/import-path-rewrite",
-  "dependencies": {},
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "glob": "^7.1.6"
+  },
   "devDependencies": {
+    "@types/glob": "^7.1.1",
     "@types/jest": "^22.2.2",
     "@types/node": "^12.6.8",
     "docs-ts": "^0.3.0",
-    "dtslint": "github:gcanti/dtslint",
     "jest": "^24.8.0",
     "mocha": "^5.2.0",
     "prettier": "^1.19.1",

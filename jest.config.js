@@ -5,13 +5,13 @@ module.exports = {
   },
   testRegex: 'test',
   moduleFileExtensions: ['ts', 'js'],
-  testPathIgnorePatterns: [],
-  coverageThreshold: {
-    global: {
-      branches: 100,
-      functions: 100,
-      lines: 100,
-      statements: 100
-    }
-  }
+  testPathIgnorePatterns: []
+  // coverageThreshold: {
+  //   global: {
+  //     branches: 100,
+  //     functions: 100,
+  //     lines: 100,
+  //     statements: 100
+  //   }
+  // }
 }
