@@ -11,15 +11,12 @@ import * as TE from 'fp-ts/es6/TaskEither';
 import * as fs from 'fs';
 import * as glob from 'glob';
 var ES6_GLOB_PATTERN = 'es6/**/*.@(ts|js)';
-var packages = ['fp-ts', 'elm-ts'];
+var packages = ['fp-ts', 'fp-ts-contrib', 'monocle-ts', 'io-ts', 'io-ts-types', 'elm-ts'];
 var regexp = new RegExp("(\\s(?:from|module)\\s['|\"](?:" + packages.join('|') + "))\\/lib\\/([\\w-\\/]+['|\"])", 'gm');
-function getReplace(regexp) {
-    return function (s) { return s.replace(regexp, '$1/es6/$2'); };
-}
 /**
  * @since 0.0.1
  */
-export var replace = getReplace(regexp);
+export var replace = function (s) { return s.replace(regexp, '$1/es6/$2'); };
 var readFile = TE.taskify(fs.readFile);
 var writeFile = TE.taskify(fs.writeFile);
 function modifyFile(f) {

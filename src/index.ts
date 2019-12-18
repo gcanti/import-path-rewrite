@@ -14,18 +14,14 @@ import * as glob from 'glob'
 
 const ES6_GLOB_PATTERN = 'es6/**/*.@(ts|js)'
 
-const packages = ['fp-ts', 'elm-ts']
+const packages = ['fp-ts', 'fp-ts-contrib', 'monocle-ts', 'io-ts', 'io-ts-types', 'elm-ts']
 
 const regexp = new RegExp(`(\\s(?:from|module)\\s['|"](?:${packages.join('|')}))\\/lib\\/([\\w-\\/]+['|"])`, 'gm')
-
-function getReplace(regexp: RegExp): (s: string) => string {
-  return s => s.replace(regexp, '$1/es6/$2')
-}
 
 /**
  * @since 0.0.1
  */
-export const replace = getReplace(regexp)
+export const replace: Endomorphism<string> = s => s.replace(regexp, '$1/es6/$2')
 
 const readFile = TE.taskify<fs.PathLike, string, NodeJS.ErrnoException, string>(fs.readFile)
 
