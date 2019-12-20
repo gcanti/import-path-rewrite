@@ -11,7 +11,22 @@ import * as TE from 'fp-ts/es6/TaskEither';
 import * as fs from 'fs';
 import * as glob from 'glob';
 var ES6_GLOB_PATTERN = 'es6/**/*.@(ts|js)';
-var packages = ['fp-ts', 'fp-ts-contrib', 'monocle-ts', 'io-ts', 'io-ts-types', 'elm-ts'];
+var packages = [
+    'fp-ts',
+    'monocle-ts',
+    'io-ts',
+    'io-ts-types',
+    'elm-ts',
+    'fp-ts-contrib',
+    'fp-ts-rxjs',
+    'fp-ts-routing',
+    'newtype-ts',
+    'fp-ts-fluture',
+    'parser-ts',
+    'retry-ts',
+    'hyper-ts',
+    'fp—ts-local-storage'
+];
 var regexp = new RegExp("(\\s(?:from|module)\\s['|\"](?:" + packages.join('|') + "))\\/lib\\/([\\w-\\/]+['|\"])", 'gm');
 /**
  * @since 0.0.1

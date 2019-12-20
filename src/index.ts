@@ -14,7 +14,22 @@ import * as glob from 'glob'
 
 const ES6_GLOB_PATTERN = 'es6/**/*.@(ts|js)'
 
-const packages = ['fp-ts', 'fp-ts-contrib', 'monocle-ts', 'io-ts', 'io-ts-types', 'elm-ts']
+const packages = [
+  'fp-ts',
+  'monocle-ts',
+  'io-ts',
+  'io-ts-types',
+  'elm-ts',
+  'fp-ts-contrib',
+  'fp-ts-rxjs',
+  'fp-ts-routing',
+  'newtype-ts',
+  'fp-ts-fluture',
+  'parser-ts',
+  'retry-ts',
+  'hyper-ts',
+  'fp—ts-local-storage'
+]
 
 const regexp = new RegExp(`(\\s(?:from|module)\\s['|"](?:${packages.join('|')}))\\/lib\\/([\\w-\\/]+['|"])`, 'gm')
 
