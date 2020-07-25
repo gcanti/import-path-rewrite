@@ -12,7 +12,8 @@ import * as TE from 'fp-ts/lib/TaskEither'
 import * as fs from 'fs'
 import * as glob from 'glob'
 
-const ES6_GLOB_PATTERN = 'es6/**/*.@(ts|js)'
+const ES6_GLOB_PATTERN = 'es6/**/*.@(d.ts|js)'
+const DIST_ES6_GLOB_PATTERN = 'dist/es6/**/*.@(d.ts|js)'
 
 const packages = [
   'fp-ts',
@@ -47,7 +48,8 @@ function modifyFile(f: Endomorphism<string>): (path: string) => TE.TaskEither<No
     pipe(
       readFile(path, 'utf8'),
       TE.map(f),
-      TE.chain(content => writeFile(path, content))
+      TE.chain(content => writeFile(path, content)),
+      TE.chain(() => TE.rightIO(log(`${path} rewritten`)))
     )
 }
 
@@ -63,7 +65,12 @@ function modifyGlob(f: Endomorphism<string>): (pattern: string) => TE.TaskEither
   return pattern => pipe(glob.sync(pattern), TE.right, TE.chain(modifyFiles(f)))
 }
 
-const replaceFiles = modifyGlob(replace)(ES6_GLOB_PATTERN)
+const modify = modifyGlob(replace)
+
+const replaceFiles = pipe(
+  modify(ES6_GLOB_PATTERN),
+  TE.chain(() => modify(DIST_ES6_GLOB_PATTERN))
+)
 
 const exit = (code: 0 | 1): IO.IO<void> => () => process.exit(code)
 
