@@ -34,12 +34,10 @@
     "url": "https://github.com/gcanti/import-path-rewrite/issues"
   },
   "homepage": "https://github.com/gcanti/import-path-rewrite",
-  "peerDependencies": {
-    "fp-ts": "^2.0.0"
-  },
   "dependencies": {
     "chalk": "^3.0.0",
-    "glob": "^7.1.6"
+    "glob": "^7.1.6",
+    "fp-ts": "^2.0.0"
   },
   "devDependencies": {
     "@types/glob": "^7.1.1",
